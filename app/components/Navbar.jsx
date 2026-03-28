@@ -1,10 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
-    <header className="absolute top-0 left-0 w-full z-50 mb-100">
+    <header className="absolute top-0 left-0 w-full z-50 mb-100" suppressHydrationWarning>
       <div className="max-w-7xl mx-auto flex items-center justify-between px-8 py-6 text-white">
         
         {/* Logo */}

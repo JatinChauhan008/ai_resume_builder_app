@@ -1,8 +1,13 @@
 "use client"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 export default function FeatureSection() {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   const features = [
     {
@@ -54,7 +59,7 @@ export default function FeatureSection() {
   ]
 
   return (
-    <section id="features" style={{ fontFamily: "'Poppins', sans-serif" }} className="w-full bg-white py-20 px-6">
+    <section id="features" style={{ fontFamily: "'Poppins', sans-serif" }} className="w-full bg-white py-20 px-6" suppressHydrationWarning>
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');`}</style>
 
       {/* Header */}
@@ -102,12 +107,13 @@ export default function FeatureSection() {
         </div>
 
         {/* Feature cards */}
-        <div className="flex flex-col gap-2 w-full max-w-md">
+        <div className="flex flex-col gap-2 w-full max-w-md" suppressHydrationWarning>
           {features.map((feature, i) => (
             <div
               key={i}
+              suppressHydrationWarning
               className={`flex items-start gap-4 p-5 rounded-2xl border cursor-pointer transition-all duration-200
-                ${activeIndex === i
+                ${isMounted && activeIndex === i
                   ? `${feature.activeBg} ${feature.activeBorder} border`
                   : `border-transparent bg-transparent ${feature.hoverBg} ${feature.hoverBorder} hover:border`
                 }`}
